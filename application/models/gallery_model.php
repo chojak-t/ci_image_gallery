@@ -3,6 +3,7 @@
     {
         
         private $gallery_path;
+        private $gallery_path_url;
         private $thumbs_path;
         
         function Gallery_model ()
@@ -14,9 +15,15 @@
             //to get ride of .. we nedd to apply realpath php function
             
             $this->gallery_path = realpath(APPPATH . '../images/');
+            $this->gallery_path_url = base_url() . '/images'; //get rid of index.php from address
             $this->thumbs_path = $this->gallery_path . '/thumbs';
         }
         
+        /**
+         * Uploading file to server to $gallery_path
+         * and generating thumbail of uploaded image.
+         * 
+         */
         function upload_file()
         {
             $config = array(
@@ -47,9 +54,30 @@
                     
                     //creating thumbnails
                     $this->load->library('image_lib', $config);
-                    $this->image_lib->resize();
-                    
+                    $this->image_lib->resize();                    
                 }
+        }
+
+        /**
+         * Reads content of the $gallery_path
+         */
+        function get_images()
+        {
+            $files = scandir($this->gallery_path);
+            //we need to get ride of '..' and '.' and subfolder 'thumbs' that scandir produces
+            $files = array_diff($files, array('.', '..', 'thumbs'));
+            
+            $images = array();
+            
+            //populate the $images array with url of image and url of thumbail
+            foreach ($files as $file) {
+                $images[] = array(
+                    'url' => $this->gallery_path,
+                    'thumb' => ''
+                );
+            }
+            
+            return $images;
         }
     }
 ?>

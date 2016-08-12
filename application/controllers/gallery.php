@@ -11,6 +11,9 @@
             {
                 $this->Gallery_model->upload_file();
             }
-            $this->load->view('gallery');
+            
+            $data['images'] = $this->Gallery_model->get_images();
+            
+            $this->load->view('gallery', $data);
         }
     }
