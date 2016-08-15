@@ -2,13 +2,13 @@
 <html lang="pl">
     <head>
         <meta charset="UTF-8" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css'); ?>"/>
         <title>CI simple gallery</title>
     </head>
     <body>
         <h1>gallery</h1>
         <div id="gallery">
             <?php
-                print_r($images);
                 if(empty($images)):
             ?>
                 <div id="empty_gallery">

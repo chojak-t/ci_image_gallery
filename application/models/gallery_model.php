@@ -15,6 +15,8 @@
             //so we need to add .. to go up one level
             //to get ride of .. we nedd to apply realpath php function
             
+            //TODO move images directory to assets, outside the application directory
+            
             $this->gallery_path = realpath(APPPATH . '../images/');
             $this->gallery_path_url = base_url() . 'images/'; //we need get rid of index.php from address with .htaccess file
             $this->thumbs_path = $this->gallery_path . '/thumbs';
