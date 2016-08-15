@@ -5,6 +5,7 @@
         private $gallery_path;
         private $gallery_path_url;
         private $thumbs_path;
+        private $thumbs_path_url;
         
         function Gallery_model ()
         {
@@ -15,8 +16,9 @@
             //to get ride of .. we nedd to apply realpath php function
             
             $this->gallery_path = realpath(APPPATH . '../images/');
-            $this->gallery_path_url = base_url() . '/images'; //get rid of index.php from address
+            $this->gallery_path_url = base_url() . 'images/'; //we need get rid of index.php from address with .htaccess file
             $this->thumbs_path = $this->gallery_path . '/thumbs';
+            $this->thumbs_path_url = $this->gallery_path_url . 'thumbs/';
         }
         
         /**
@@ -72,8 +74,8 @@
             //populate the $images array with url of image and url of thumbail
             foreach ($files as $file) {
                 $images[] = array(
-                    'url' => $this->gallery_path,
-                    'thumb' => ''
+                    'url' => $this->gallery_path_url . $file,
+                    'thumb' => $this->thumbs_path_url . $file
                 );
             }
             
